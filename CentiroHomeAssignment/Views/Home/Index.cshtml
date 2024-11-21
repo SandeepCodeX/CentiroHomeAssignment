@@ -1,0 +1,39 @@
+﻿@model List<FileModel>
+
+    <h2>Details</h2>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered"> 
+        <thead class="thead-dark"> 
+            <tr>
+                <th>OrderNumber</th>
+                <th>OrderLineNumber</th>
+                <th>ProductNumber</th>
+                <th>Quantity</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>ProductGroup</th>
+                <th>OrderDate</th>
+                <th>CustomerName</th>
+                <th>CustomerNumber</th>
+            </tr> 
+            </thead> 
+            <tbody> @foreach (var person in Model)
+            {
+                <tr>
+                    <td>@person.OrderNumber</td>
+                    <td>@person.OrderLineNumber</td>
+                    <td>@person.ProductNumber</td>
+                    <td>@person.Quantity</td>
+                    <td>@person.Name</td>
+                    <td>@person.Description</td>
+                    <td>@person.Price</td>
+                    <td>@person.ProductGroup</td>
+                    <td>@person.OrderDate</td>
+                    <td>@person.CustomerName</td>
+                    <td>@person.CustomerNumber</td>
+                </tr>
+            } </tbody> </table>
+
+
