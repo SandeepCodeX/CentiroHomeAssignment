@@ -5,7 +5,7 @@ namespace CentiroHomeAssignment.Models
 {
     public class FileModel
     {
-        public int OrderNumber { get; set; }
+        public string OrderNumber { get; set; }
         public int OrderLineNumber { get; set; }
         public string ProductNumber { get; set; }
         public int Quantity { get; set; }
