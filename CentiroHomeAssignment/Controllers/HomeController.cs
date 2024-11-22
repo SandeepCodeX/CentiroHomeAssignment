@@ -9,37 +9,44 @@ using System.Globalization;
 using System.IO;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace CentiroHomeAssignment.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _config;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _config = configuration;
+
         }
 
         public IActionResult Index()
         {
-            List<FileModel> lst = CSVService();
+            string fileTypeToLoad = _config["FileTypeToLoad"].ToString();
+            List<FileModel> lst = DataLoadService(fileTypeToLoad);
             return View(lst);
         }
 
-        public List<FileModel> CSVService()
+        public List<FileModel> DataLoadService(string fileTypeToLoad)
         {
             var allRecords = new List<FileModel>();
 
-            var filePaths = new List<string> { @"C:\Users\ksand\Downloads\CentiroHomeAssignment\CentiroHomeAssignment\App_Data\Order1.csv",
-                @"C:\Users\ksand\Downloads\CentiroHomeAssignment\CentiroHomeAssignment\App_Data\Order2.csv",
-                @"C:\Users\ksand\Downloads\CentiroHomeAssignment\CentiroHomeAssignment\App_Data\Order3.csv" };
+            string currentDir = Environment.CurrentDirectory;
+            string app_Data_Path = Path.Combine(currentDir, "App_Data");
 
-            //var filePath = @"C:\Users\ksand\Downloads\CentiroHomeAssignment\CentiroHomeAssignment\App_Data\Order1.csv";
+            DirectoryInfo d = new DirectoryInfo(app_Data_Path);
 
-            foreach (var filePath in filePaths)
+            FileInfo[] filePaths = d.GetFiles(fileTypeToLoad);
+
+            for(int i=0; i<filePaths.Length; i++)
             {
-                var reader = new StreamReader(filePath);
+                var reader = new StreamReader(filePaths[i].ToString());
 
                 var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = "|" });
 
@@ -49,10 +56,5 @@ namespace CentiroHomeAssignment.Controllers
             return allRecords;
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
