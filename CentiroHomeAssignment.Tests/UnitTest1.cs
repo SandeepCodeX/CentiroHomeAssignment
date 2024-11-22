@@ -16,7 +16,7 @@ namespace CentiroHomeAssignment.Tests
             List<FileModel> list = new List<FileModel>();
 
             list.Add(new FileModel { CustomerName = "customerName", CustomerNumber = "1001", Description = "Description", Name = "testName", 
-                OrderDate= new System.DateTime(2024-01-01), OrderLineNumber =100, OrderNumber=101, Price = 100.99m, ProductGroup = "testGrp",  
+                OrderDate= new System.DateTime(2024-01-01), OrderLineNumber =100, OrderNumber="101", Price = 100.99m, ProductGroup = "testGrp",  
                 ProductNumber = "A0001AS", Quantity =25});
 
             list.Add(new FileModel
@@ -27,7 +27,7 @@ namespace CentiroHomeAssignment.Tests
                 Name = "testName2",
                 OrderDate = new System.DateTime(2024 - 01 - 02),
                 OrderLineNumber = 101,
-                OrderNumber = 102,
+                OrderNumber = "102",
                 Price = 200.99m,
                 ProductGroup = "testGrp2",
                 ProductNumber = "A0001AS2",
@@ -42,7 +42,7 @@ namespace CentiroHomeAssignment.Tests
                 Name = "testName3",
                 OrderDate = new System.DateTime(2024 - 02 - 01),
                 OrderLineNumber = 103,
-                OrderNumber = 103,
+                OrderNumber = "103",
                 Price = 300.99m,
                 ProductGroup = "testGrp3",
                 ProductNumber = "A0001AS3",
