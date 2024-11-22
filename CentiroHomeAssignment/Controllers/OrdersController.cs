@@ -12,6 +12,7 @@ using System.Linq;
 
 namespace CentiroHomeAssignment.Controllers
 {
+    [Route("[controller]")]
     public class OrdersController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -31,6 +32,7 @@ namespace CentiroHomeAssignment.Controllers
             return View(lst);
         }
 
+        [HttpGet("{orderNumber}")]
         public IActionResult GetByOrderNumber(string orderNumber)
         {
             List<FileModel> lst = DataLoadService(fileTypeToLoad);
@@ -38,7 +40,7 @@ namespace CentiroHomeAssignment.Controllers
             return View(lst);
         }
 
-        public List<FileModel> DataLoadService(string fileTypeToLoad)
+        private List<FileModel> DataLoadService(string fileTypeToLoad)
         {
             var allRecords = new List<FileModel>();
 
