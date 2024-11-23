@@ -11,14 +11,12 @@ namespace CentiroHomeAssignment.Controllers
     [Route("[controller]")]
     public class OrdersController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _config;
         private readonly IDataLoadService _dataLoadService;
         string fileTypeToLoad = "";
 
-        public OrdersController(ILogger<HomeController> logger, IConfiguration configuration, IDataLoadService dataLoadService)
+        public OrdersController(IConfiguration configuration, IDataLoadService dataLoadService)
         {
-            _logger = logger;
             _config = configuration;
             _dataLoadService = dataLoadService;
             
